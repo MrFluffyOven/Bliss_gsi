@@ -23,7 +23,7 @@ To do that, run these commands:
 
 ### Clone the Manifest to add necessary dependencies for gsi:
  
-    git clone https://github.com/TrebleDroid/treble_manifest.git .repo/local_manifests  -b android=14.0
+    git clone https://github.com/MrFluffyOven/treble_manifest.git .repo/local_manifests  -b android=14.0
   
 
 
