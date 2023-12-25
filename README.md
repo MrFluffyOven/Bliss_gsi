@@ -23,6 +23,7 @@ repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe
 
 ### Clone the Manifest to add necessary dependencies for gsi:
  
+```bash
 git clone https://github.com/MrFluffyOven/treble_manifest.git -b android-14.0 .repo/local_manifests
   
 
