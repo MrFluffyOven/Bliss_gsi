@@ -84,3 +84,8 @@ These people have helped this project in some way or another, so they should be 
 - [Peter Cai](https://github.com/PeterCxy)
 - [Iceows](https://github.com/Iceows)
 - [ChonDoit](https://github.com/ChonDoit)
+
+### TD and Nazim patches
+    Trebledroid Patches are not owned or wirtten by MrFluffyOven, These are from Trebledroid
+
+    Nazim Patches are not from MrFluffyOven, they are from Naz664
