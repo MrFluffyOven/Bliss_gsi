@@ -92,6 +92,7 @@ If you face any conflicts while applying patches, apply the patch manually.
 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
+- [Nazim]()
 - [Bliss Team](https://github.com/BlissRoms)
 - [Phhusson](https://github.com/phhusson)
 - [AndyYan](https://github.com/AndyCGYan)
