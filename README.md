@@ -17,7 +17,7 @@ To do that, run these commands:
 ### To initialize your local repository, run this command:
 
 ```bash
-   repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe
+repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe
 ```
  
 
