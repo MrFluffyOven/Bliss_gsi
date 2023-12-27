@@ -5,6 +5,7 @@ set -e
 source="$(readlink -f -- $1)"
 trebledroid="$source/patches/trebledroid"
 personal="$source/patches/personal"
+nazim="$source/patches/nazim"
 
 printf "\n ### APPLYING TREBLEDROID PATCHES ###\n";
 sleep 1.0;
