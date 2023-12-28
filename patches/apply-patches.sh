@@ -76,8 +76,8 @@ done
 printf "\n ### APPLYING NAZIM PATCHES ###\n";
 sleep 1.0;
 for path in $(cd $nazim; echo *); do
-	tree="$(tr _ / <<<$path | sed -e 's;platform/;;g')"
-	printf "\n| $path ###\n";
+	tree="$(tr _ / <<<$path_nazim | sed -e 's;platform/;;g')"
+	printf "\n| $path_nazim ###\n";
 	[ "$tree" == build ] && tree=build/make
     [ "$tree" == vendor/hardware/overlay ] && tree=vendor/hardware_overlay
     [ "$tree" == treble/app ] && tree=treble_app
