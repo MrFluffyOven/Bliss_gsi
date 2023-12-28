@@ -32,7 +32,7 @@ To do that, run these commands:
 
 Copy the patches folder to rom folder and in rom folder
 
-    bash patches/apply-patches.sh .
+    bash patches/patch.sh .
 
 ### Generating Rom Makefile
 
