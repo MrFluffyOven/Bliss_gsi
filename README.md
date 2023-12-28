@@ -21,7 +21,7 @@ To do that, run these commands:
 ### Clone the Manifest to add necessary dependencies for gsi:
  
 
-    git clone https://github.com/MrFluffyOven/treble_manifest.git -b android-14.0 .repo/local_manifests
+    git clone https://github.com/MrFluffyOven/treble_bliss.git -b 14 .repo/local_manifests
 
 ### Afterwards, sync the source by running this command:
 
