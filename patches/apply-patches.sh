@@ -75,7 +75,7 @@ done
 
 printf "\n ### APPLYING NAZIM PATCHES ###\n";
 sleep 1.0;
-for path in $(cd $nazim; echo *); do
+for path_nazim in $(cd $nazim; echo *); do
 	tree="$(tr _ / <<<$path_nazim | sed -e 's;platform/;;g')"
 	printf "\n| $path_nazim ###\n";
 	[ "$tree" == build ] && tree=build/make
