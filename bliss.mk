@@ -1,5 +1,3 @@
-# This makefile is the makefile from naz664's repo, with OTA removed, MrFluffyOven did not write this file
-
 $(call inherit-product, vendor/bliss/config/common.mk)
 $(call inherit-product, vendor/bliss/config/common_full_phone.mk)
 $(call inherit-product, vendor/bliss/config/BoardConfigSoong.mk)
