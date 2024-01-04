@@ -2,7 +2,7 @@
 
 echo
 echo "--------------------------------------"
-echo "         Bliss 14.0 Uploadbot          "
+echo "         Bliss 14.0 Uploadbot         "
 echo "          Written by Ponces           "
 echo "        Edited by MrFluffyOven        "
 echo "--------------------------------------"
