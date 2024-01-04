@@ -1,7 +1,7 @@
 # TrebleDroid BLISS GSI
 
 ## Build
-To get started with building AOSP GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
+To get started with building Bliss GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
 - Create a new working directory for your AOSP build and navigate to it:
     ```
     mkdir bliss; cd bliss
