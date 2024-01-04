@@ -2,9 +2,9 @@
 
 echo
 echo "--------------------------------------"
-echo "         AOSP 14.0 Uploadbot          "
-echo "                  by                  "
-echo "                ponces                "
+echo "         Bliss 14.0 Uploadbot          "
+echo "          Written by Ponces           "
+echo "        Edited by MrFluffyOven        "
 echo "--------------------------------------"
 echo
 
