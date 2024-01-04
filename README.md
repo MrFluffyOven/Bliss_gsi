@@ -4,19 +4,16 @@
 To get started with building AOSP GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
 - Create a new working directory for your AOSP build and navigate to it:
     ```
-    mkdir aosp; cd aosp
+    mkdir bliss; cd bliss
     ```
 - Clone this repo:
     ```
-    git clone https://github.com/ponces/treble_aosp -b android-14.0
+    git clone https://github.com/MrFluffyOven/treble_bliss -b 14
     ```
 - Finally, start the build script:
     ```
-    bash treble_aosp/build.sh
+    bash treble_bliss/build.sh
     ```
-
-## Issues
-[Open issue](https://github.com/ponces/treble_aosp/issues/new/choose)
 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
