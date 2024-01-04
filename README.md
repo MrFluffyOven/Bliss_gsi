@@ -1,91 +1,31 @@
-<img src="https://imgur.com/jmiT0ss.png">
+# TrebleDroid AOSP GSI
 
-### To get started with building Bliss GSI,
-you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
+## Build
+To get started with building AOSP GSI, you'll need to get familiar with [Git and Repo](https://source.android.com/source/using-repo.html) as well as [How to build a GSI](https://github.com/phhusson/treble_experimentations/wiki/How-to-build-a-GSI%3F).
+- Create a new working directory for your AOSP build and navigate to it:
+    ```
+    mkdir aosp; cd aosp
+    ```
+- Clone this repo:
+    ```
+    git clone https://github.com/ponces/treble_aosp -b android-14.0
+    ```
+- Finally, start the build script:
+    ```
+    bash treble_aosp/build.sh
+    ```
 
-
-### Create the directories
-
-As a first step, you'll have to create and enter a folder with the appropriate name.
-To do that, run these commands:
-
-
-    mkdir bliss
-    cd bliss
-
-### To initialize your local repository, run this command:
-
-    repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe
- 
-
-### Clone the Manifest to add necessary dependencies for gsi:
- 
-
-    git clone https://github.com/MrFluffyOven/treble_bliss.git -b 14 .repo/local_manifests
-
-### Afterwards, sync the source by running this command:
-
-    repo sync --force-sync --optimized-fetch --no-tags --no-clone-bundle --prune -j$(nproc --all)
-
-
-### After syncing, apply the patches:
-
-Copy the patches folder to rom folder and in rom folder
-
-    bash patches/patch.sh .
-
-### Generating Rom Makefile
-
- In rom folder,
- 
- 
-    cd device/phh/treble
-    bash generate.sh bliss
-
-### Turn on caching to speed up build
-
-You can speed up subsequent builds by adding these lines to your ~/.bashrc OR ~/.zshrc file:
-
-    export USE_CCACHE=1
-    export CCACHE_COMPRESS=1
-    export CCACHE_MAXSIZE=50G # 50 GB
-
-## Compilation 
-
-In rom folder,
-
-    . build/envsetup.sh
-    ccache -M 50G -F 0
-    lunch treble_arm64_bgN-userdebug 
-    make systemimage -j$(nproc --all)
-
-## Compress
-
-After compilation,
-If you want to compress the build.
-In rom folder,
- 
-    cd out/target/product/tdgsi_arm64_ab
-    xz -z -k system.img 
-
-
-## Troubleshoot
- 
-If you face any conflicts while applying patches, apply the patch manually.
-
+## Issues
+[Open issue](https://github.com/ponces/treble_aosp/issues/new/choose)
 
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
-- [Nazim](https://github.com/naz664)
-- [Bliss Team](https://github.com/BlissRoms)
-- [Phhusson](https://github.com/phhusson)
+- [phhusson](https://github.com/phhusson)
 - [AndyYan](https://github.com/AndyCGYan)
-- [Ponces](https://github.com/ponces)
+- [eremitein](https://github.com/eremitein)
+- [kdrag0n](https://github.com/kdrag0n)
 - [Peter Cai](https://github.com/PeterCxy)
+- [haridhayal11](https://github.com/haridhayal11)
+- [sooti](https://github.com/sooti)
 - [Iceows](https://github.com/Iceows)
 - [ChonDoit](https://github.com/ChonDoit)
-
-### TD and Nazim patches
-    Trebledroid Patches are not owned or wirtten by MrFluffyOven, These are from Trebledroid
-
-    Nazim Patches are not from MrFluffyOven, they are from Naz664
