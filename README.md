@@ -18,6 +18,7 @@ To get started with building Bliss GSI, you'll need to get familiar with [Git an
 ## Credits
 These people have helped this project in some way or another, so they should be the ones who receive all the credit:
 - [Bliss Team](https://github.com/BlissRoms)
+- [Ponces](https://github.com/ponces)
 - [phhusson](https://github.com/phhusson)
 - [AndyYan](https://github.com/AndyCGYan)
 - [eremitein](https://github.com/eremitein)
