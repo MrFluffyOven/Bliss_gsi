@@ -2,33 +2,34 @@
 
 echo
 echo "--------------------------------------"
-echo "         Bliss 14.0 Buildbot          "
-echo "          Written by Ponces           "
-echo "        Edited by MrFluffyOven        "
+echo "          AOSP 14.0 Buildbot          "
+echo "                  by                  "
+echo "                ponces                "
+echo "        edited by MrFluffyOven        "
 echo "--------------------------------------"
 echo
 
 set -e
 
-BL=$PWD/treble_bliss
+BL=$PWD/treble_aosp
 BD=$HOME/builds
 
 initRepos() {
     if [ ! -d .repo ]; then
         echo "--> Initializing workspace"
-        repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe --git-lfs
+        repo init -u https://android.googlesource.com/platform/manifest -b android-14.0.0_r21 --git-lfs
         echo
 
         echo "--> Preparing local manifest"
-        mkdir -p .repo/local_manifests
-        cp $BL/build/manifest.xml .repo/local_manifests
+        mkdir -p .repo
+        git clone https://github.com/MrFluffyOven/treble_manifest.git -b arrowgapps .repo/local_manifests
         echo
     fi
 }
 
 syncRepos() {
     echo "--> Syncing repos"
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+    repo sync -c --force-sync --no-clone-bundle --no-tags -j6
     echo
 }
 
@@ -43,7 +44,8 @@ applyPatches() {
 
     echo "--> Generating makefiles"
     cd device/phh/treble
-    bash generate.sh bliss
+    cp $BL/aosp.mk .
+    bash generate.sh aosp
     cd ../../..
     echo
 }
@@ -67,8 +69,8 @@ buildTrebleApp() {
 buildVanillaVariant() {
     echo "--> Building treble_arm64_bvN"
     lunch treble_arm64_bvN-userdebug
-    make -j$(nproc --all) installclean
-    make -j$(nproc --all) systemimage
+    make -j4 installclean
+    make -j4 systemimage
     mv $OUT/system.img $BD/system-treble_arm64_bvN.img
     echo
 }
@@ -76,8 +78,8 @@ buildVanillaVariant() {
 buildGappsVariant() {
     echo "--> Building treble_arm64_bgN"
     lunch treble_arm64_bgN-userdebug
-    make -j$(nproc --all) installclean
-    make -j$(nproc --all) systemimage
+    make -j4 installclean
+    make -j4 systemimage
     mv $OUT/system.img $BD/system-treble_arm64_bgN.img
     echo
 }
@@ -100,10 +102,10 @@ buildVndkliteVariants() {
 generatePackages() {
     echo "--> Generating packages"
     buildDate="$(date +%Y%m%d)"
-    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/bliss-arm64-ab-vanilla-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/aosp-arm64-ab-vanilla-14.0-$buildDate.img.xz
     xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/aosp-arm64-ab-vanilla-vndklite-14.0-$buildDate.img.xz
-    xz -cv $BD/system-treble_arm64_bgN.img -T0 > $BD/bliss-arm64-ab-gapps-14.0-$buildDate.img.xz
-    xz -cv $BD/system-treble_arm64_bgN-vndklite.img -T0 > $BD/bliss-arm64-ab-gapps-vndklite-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bgN.img -T0 > $BD/aosp-arm64-ab-gapps-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bgN-vndklite.img -T0 > $BD/aosp-arm64-ab-gapps-vndklite-14.0-$buildDate.img.xz
     rm -rf $BD/system-*.img
     echo
 }
@@ -114,7 +116,7 @@ generateOta() {
     buildDate="$(date +%Y%m%d)"
     timestamp="$START"
     json="{\"version\": \"$version\",\"date\": \"$timestamp\",\"variants\": ["
-    find $BD/ -name "bliss-*-14.0-$buildDate.img.xz" | sort | {
+    find $BD/ -name "aosp-*-14.0-$buildDate.img.xz" | sort | {
         while read file; do
             filename="$(basename $file)"
             if [[ $filename == *"vanilla-vndklite"* ]]; then
@@ -127,7 +129,7 @@ generateOta() {
                 name="treble_arm64_bgN"
             fi
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/MrFluffyOven/treble_bliss/releases/download/$version/$filename"
+            url="https://github.com/ponces/treble_aosp/releases/download/$version/$filename"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
