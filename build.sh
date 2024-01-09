@@ -2,7 +2,7 @@
 
 echo
 echo "--------------------------------------"
-echo "          Bliss 14.0 Buildbot          "
+echo "          Bliss 14.0 Buildbot         "
 echo "                  by                  "
 echo "                ponces                "
 echo "        edited by MrFluffyOven        "
