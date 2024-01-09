@@ -2,7 +2,7 @@
 
 echo
 echo "--------------------------------------"
-echo "          AOSP 14.0 Buildbot          "
+echo "          Bliss 14.0 Buildbot          "
 echo "                  by                  "
 echo "                ponces                "
 echo "        edited by MrFluffyOven        "
@@ -11,7 +11,7 @@ echo
 
 set -e
 
-BL=$PWD/treble_aosp
+BL=$PWD/treble_bliss
 BD=$HOME/builds
 
 initRepos() {
@@ -45,7 +45,7 @@ applyPatches() {
     echo "--> Generating makefiles"
     cd device/phh/treble
     cp $BL/aosp.mk .
-    bash generate.sh aosp
+    bash generate.sh bliss
     cd ../../..
     echo
 }
@@ -102,10 +102,10 @@ buildVndkliteVariants() {
 generatePackages() {
     echo "--> Generating packages"
     buildDate="$(date +%Y%m%d)"
-    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/aosp-arm64-ab-vanilla-14.0-$buildDate.img.xz
-    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/aosp-arm64-ab-vanilla-vndklite-14.0-$buildDate.img.xz
-    xz -cv $BD/system-treble_arm64_bgN.img -T0 > $BD/aosp-arm64-ab-gapps-14.0-$buildDate.img.xz
-    xz -cv $BD/system-treble_arm64_bgN-vndklite.img -T0 > $BD/aosp-arm64-ab-gapps-vndklite-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN.img -T0 > $BD/bliss-arm64-ab-vanilla-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bvN-vndklite.img -T0 > $BD/bliss-arm64-ab-vanilla-vndklite-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bgN.img -T0 > $BD/bliss-arm64-ab-gapps-14.0-$buildDate.img.xz
+    xz -cv $BD/system-treble_arm64_bgN-vndklite.img -T0 > $BD/bliss-arm64-ab-gapps-vndklite-14.0-$buildDate.img.xz
     rm -rf $BD/system-*.img
     echo
 }
@@ -116,7 +116,7 @@ generateOta() {
     buildDate="$(date +%Y%m%d)"
     timestamp="$START"
     json="{\"version\": \"$version\",\"date\": \"$timestamp\",\"variants\": ["
-    find $BD/ -name "aosp-*-14.0-$buildDate.img.xz" | sort | {
+    find $BD/ -name "bliss-*-14.0-$buildDate.img.xz" | sort | {
         while read file; do
             filename="$(basename $file)"
             if [[ $filename == *"vanilla-vndklite"* ]]; then
@@ -129,7 +129,7 @@ generateOta() {
                 name="treble_arm64_bgN"
             fi
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/ponces/treble_aosp/releases/download/$version/$filename"
+            url="https://github.com/ponces/treble_bliss/releases/download/$version/$filename"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
