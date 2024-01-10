@@ -44,7 +44,7 @@ applyPatches() {
 
     echo "--> Generating makefiles"
     cd device/phh/treble
-    cp $BL/aosp.mk .
+    cp $BL/bliss.mk .
     bash generate.sh bliss
     cd ../../..
     echo
@@ -129,7 +129,7 @@ generateOta() {
                 name="treble_arm64_bgN"
             fi
             size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/ponces/treble_bliss/releases/download/$version/$filename"
+            url="https://github.com/MrFluffyOven/treble_bliss/releases/download/$version/$filename"
             json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
         done
         json="${json%?}]}"
