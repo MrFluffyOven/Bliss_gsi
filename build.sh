@@ -22,7 +22,7 @@ initRepos() {
 
         echo "--> Preparing local manifest"
         mkdir -p .repo
-        git clone https://github.com/MrFluffyOven/treble_manifest.git -b arrowgapps .repo/local_manifests
+        git clone https://github.com/MrFluffyOven/treble_manifest.git -b poncesgapps .repo/local_manifests
         echo
     fi
 }
