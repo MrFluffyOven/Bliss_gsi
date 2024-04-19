@@ -2,10 +2,7 @@
 
 echo
 echo "--------------------------------------"
-echo "          Bliss 14.0 Buildbot         "
-echo "                  by                  "
-echo "                ponces                "
-echo "        edited by MrFluffyOven        "
+echo "             Rebuild Only             "       
 echo "--------------------------------------"
 echo
 
@@ -14,55 +11,10 @@ set -e
 BL=$PWD/treble_bliss
 BD=$HOME/builds
 
-initRepos() {
-    if [ ! -d .repo ]; then
-        echo "--> Initializing workspace"
-        repo init -u https://github.com/BlissRoms/platform_manifest.git -b universe --git-lfs
-        echo
-
-        echo "--> Preparing local manifest"
-        mkdir -p .repo
-        git clone https://github.com/MrFluffyOven/treble_manifest.git -b poncesgapps .repo/local_manifests
-        echo
-    fi
-}
-
-syncRepos() {
-    echo "--> Syncing repos"
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j6
-    echo
-}
-
-applyPatches() {
-    echo "--> Applying TrebleDroid patches"
-    bash $BL/patch.sh $BL trebledroid
-    echo
-
-    echo "--> Applying personal patches"
-    bash $BL/patch.sh $BL personal
-    echo
-
-    echo "--> Generating makefiles"
-    cd device/phh/treble
-    cp $BL/bliss.mk .
-    bash generate.sh bliss
-    cd ../../..
-    echo
-}
-
 setupEnv() {
     echo "--> Setting up build environment"
     source build/envsetup.sh &>/dev/null
     mkdir -p $BD
-    echo
-}
-
-buildTrebleApp() {
-    echo "--> Building treble_app"
-    cd treble_app
-    bash build.sh release
-    cp TrebleApp.apk ../vendor/hardware_overlay/TrebleApp/app.apk
-    cd ..
     echo
 }
 
@@ -110,46 +62,15 @@ generatePackages() {
     echo
 }
 
-generateOta() {
-    echo "--> Generating OTA file"
-    version="$(date +v%Y.%m.%d)"
-    buildDate="$(date +%Y%m%d)"
-    timestamp="$START"
-    json="{\"version\": \"$version\",\"date\": \"$timestamp\",\"variants\": ["
-    find $BD/ -name "bliss-*-14.0-$buildDate.img.xz" | sort | {
-        while read file; do
-            filename="$(basename $file)"
-            if [[ $filename == *"vanilla-vndklite"* ]]; then
-                name="treble_arm64_bvN-vndklite"
-            elif [[ $filename == *"gapps-vndklite"* ]]; then
-                name="treble_arm64_bgN-vndklite"
-            elif [[ $filename == *"vanilla"* ]]; then
-                name="treble_arm64_bvN"
-            else
-                name="treble_arm64_bgN"
-            fi
-            size=$(wc -c $file | awk '{print $1}')
-            url="https://github.com/MrFluffyOven/treble_bliss/releases/download/$version/$filename"
-            json="${json} {\"name\": \"$name\",\"size\": \"$size\",\"url\": \"$url\"},"
-        done
-        json="${json%?}]}"
-        echo "$json" | jq . > $BL/config/ota.json
-    }
-    echo
-}
 
 START=$(date +%s)
 
-initRepos
-syncRepos
-applyPatches
 setupEnv
 buildTrebleApp
 buildVanillaVariant
 buildGappsVariant
 buildVndkliteVariants
 generatePackages
-generateOta
 
 END=$(date +%s)
 ELAPSEDM=$(($(($END-$START))/60))

@@ -2,7 +2,7 @@
 
 echo
 echo "--------------------------------------"
-echo "           Applying Patches           "       
+echo "          Generate Makefiles          "       
 echo "--------------------------------------"
 echo
 
